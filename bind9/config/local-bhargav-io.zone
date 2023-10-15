@@ -2,18 +2,18 @@ $TTL 2d
 
 $ORIGIN local.bhargav.io.
 
-@               IN      SOA     ns.local.bhargav.io.    hello.bhargav.io.   (
-                                2023101501      ; serial number as YYYYMMDDRR
-                                12h             ; refresh time
-                                15m             ; retry time
-                                3w              ; expire time
-                                2h              ; minimum TTL
-                                )
+@				IN		SOA		ns.local.bhargav.io.	hello.bhargav.io.	(
+								2023101503		; serial number as YYYYMMDDRR
+								12h				; refresh time
+								15m				; retry time
+								3w				; expire time
+								2h				; minimum TTL
+								)
 
-                IN      NS      ns.local.bhargav.io.
+				IN		NS		ns.local.bhargav.io.
 
-ns              IN      A       192.168.79.19
+ns				IN		A		192.168.79.19
 
 ; -- DNS Records Below
 
-auth            IN      A       192.168.79.19
+*				IN		A		192.168.79.19
