@@ -1,0 +1,29 @@
+services:
+  auth_frontend:
+    container_name: auth_frontend
+    build:
+      context: ./auth_frontend
+    networks:
+      - auth
+
+  caddy:
+    image: caddy:latest
+    container_name: caddy
+    restart: unless-stopped
+    security_opt:
+      - label:disable
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    depends_on:
+      - auth_frontend
+    volumes:
+      - ./caddy:/etc/caddy
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - auth
+
+
+networks:
+  auth:
