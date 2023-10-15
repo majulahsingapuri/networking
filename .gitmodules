@@ -1,6 +1,6 @@
 [submodule "auth_backend"]
 	path = auth_backend
-	url = ./auth_backend
+	url = https://github.com/majulahsingapuri/auth_backend.git
 [submodule "auth_frontend"]
 	path = auth_frontend
-	url = ./auth_frontend
+	url = https://github.com/majulahsingapuri/auth_frontend.git
