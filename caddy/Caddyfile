@@ -1,3 +1,16 @@
-http://auth.local.bhargav.io {
-	reverse_proxy http://auth_frontend:3000
+{
+	# do not attempt to install certs on the docker container
+	skip_install_trust
 }
+
+(localTLS) {
+	tls internal {
+		on_demand
+	}
+}
+
+(localSubnets) {
+	@localSubnets remote_ip private_ranges
+}
+
+import *.caddy

@@ -1,10 +1,34 @@
 services:
+  db:
+    image: postgres:latest
+    container_name: auth_db
+    restart: unless-stopped
+    volumes:
+      - auth_db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=auth 
+      - POSTGRES_PASSWORD=password 
+      - POSTGRES_DB=auth
+    networks:
+      - auth
+
+  auth_backend:
+    container_name: auth_backend
+    build:
+      context: ./auth_backend
+    networks:
+      - auth
+    depends_on:
+      - db
+
   auth_frontend:
     container_name: auth_frontend
     build:
       context: ./auth_frontend
     networks:
       - auth
+    depends_on:
+      - auth_backend
 
   caddy:
     image: caddy:latest
@@ -16,8 +40,6 @@ services:
       - "80:80"
       - "443:443"
       - "443:443/udp"
-    depends_on:
-      - auth_frontend
     volumes:
       - ./caddy:/etc/caddy
       - /etc/localtime:/etc/localtime:ro
@@ -27,3 +49,6 @@ services:
 
 networks:
   auth:
+
+volumes:
+  auth_db:
