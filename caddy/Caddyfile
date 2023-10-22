@@ -3,14 +3,16 @@
 	skip_install_trust
 }
 
-(localTLS) {
-	tls internal {
-		on_demand
-	}
-}
-
 (localSubnets) {
 	@localSubnets remote_ip private_ranges
 }
 
-import *.caddy
+https://*.local.bhargav.io {
+	tls {
+		dns porkbun {
+			api_key {env.PORKBUN_API_KEY}
+			api_secret_key {env.PORKBUN_API_PASSWORD}
+		}
+	}
+	import *.caddy
+}

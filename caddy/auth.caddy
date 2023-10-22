@@ -1,18 +1,7 @@
-http://auth.local.bhargav.io {
-	import localSubnets
-	import localTLS
-	handle /api/* {
-		reverse_proxy @localSubnets http://auth_backend:8000
-	}
-	handle * {
-		reverse_proxy @localSubnets http://auth_frontend:3000
-	}
-}
+@auth host auth.local.bhargav.io
 
-:80 {
+handle @auth {
 	import localSubnets
-	import localTLS
-
 	handle /api/* {
 		reverse_proxy @localSubnets http://auth_backend:8000
 	}

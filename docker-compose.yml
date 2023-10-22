@@ -31,8 +31,11 @@ services:
       - auth_backend
 
   caddy:
-    image: caddy:latest
     container_name: caddy
+    build:
+      context: ./caddy
+    env_file:
+      - ./caddy/.env
     restart: unless-stopped
     security_opt:
       - label:disable
