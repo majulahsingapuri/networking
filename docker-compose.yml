@@ -5,10 +5,8 @@ services:
     restart: unless-stopped
     volumes:
       - auth_db:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_USER=auth 
-      - POSTGRES_PASSWORD=password 
-      - POSTGRES_DB=auth
+    env_file:
+      - ./postgres/local.env
     networks:
       - auth
 
@@ -16,6 +14,8 @@ services:
     container_name: auth_backend
     build:
       context: ./auth_backend
+      tags:
+        - auth_backend
     networks:
       - auth
     depends_on:
@@ -25,6 +25,8 @@ services:
     container_name: auth_frontend
     build:
       context: ./auth_frontend
+      tags:
+        - auth_frontend
     networks:
       - auth
     depends_on:
@@ -34,6 +36,8 @@ services:
     container_name: caddy
     build:
       context: ./caddy
+      tags:
+        - caddy_porkbun
     env_file:
       - ./caddy/.env
     restart: unless-stopped
@@ -55,3 +59,4 @@ networks:
 
 volumes:
   auth_db:
+    name: auth_db
