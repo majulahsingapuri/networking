@@ -1,5 +1,10 @@
-https://*.localhost {
-	@auth host auth.localhost
+https://*.local.localhost {
+	@app host app.local.localhost
+	@auth host auth.local.localhost
+
+	handle @app {
+		file_server
+	}
 
 	handle @auth {
 		handle /api/* {
