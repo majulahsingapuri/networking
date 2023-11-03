@@ -8,8 +8,16 @@ https://*.local.localhost {
 
 	handle @auth {
 		handle /api/* {
-			reverse_proxy /accounts/* :8000
-			reverse_proxy /api/* :8000
+			reverse_proxy :8000
+		}
+		handle /admin* {
+			reverse_proxy :8000
+		}
+		handle /static* {
+			reverse_proxy :8000
+		}
+		handle /accounts/* {
+			reverse_proxy :8000
 		}
 		handle * {
 			reverse_proxy :3000
