@@ -12,6 +12,7 @@ services:
 
   auth_backend:
     container_name: auth_backend
+    image: auth_backend:0.0.1
     build:
       context: ./auth_backend
       tags:
@@ -23,6 +24,7 @@ services:
 
   auth_frontend:
     container_name: auth_frontend
+    image: auth_frontend:0.0.1
     build:
       context: ./auth_frontend
       tags:
@@ -34,6 +36,7 @@ services:
 
   caddy:
     container_name: caddy
+    image: caddy_porkbun:1.0.0
     build:
       context: ./caddy
       tags:
@@ -48,7 +51,6 @@ services:
       - "443:443"
       - "443:443/udp"
     volumes:
-      - ./caddy:/etc/caddy
       - /etc/localtime:/etc/localtime:ro
     networks:
       - auth
