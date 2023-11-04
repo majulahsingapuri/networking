@@ -1,0 +1,8 @@
+@ont host ont.local.bhargav.io
+
+handle @ont {
+	import localSubnets
+	handle * {
+		reverse_proxy @localSubnets http://192.168.1.254
+	}
+}

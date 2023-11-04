@@ -1,0 +1,8 @@
+@router host router.local.bhargav.io
+
+handle @router {
+	import localSubnets
+	handle * {
+		reverse_proxy @localSubnets http://192.168.79.1
+	}
+}
