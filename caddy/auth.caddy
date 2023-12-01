@@ -3,7 +3,9 @@
 handle @auth {
 	import localSubnets
 	handle /api/* {
-		reverse_proxy @localSubnets http://auth_backend:8000
+		reverse_proxy @localSubnets http://auth_backend:8000 {
+			header_up +X-Forwarded-Proto "https"
+		}
 	}
 	handle * {
 		reverse_proxy @localSubnets http://auth_frontend:3000
